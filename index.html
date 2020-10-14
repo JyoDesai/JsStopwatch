@@ -1,0 +1,146 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css'href='index.css'>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></head>
+
+    
+
+    <body>
+    <div class="bg_color bg-dark">
+        <div class="container pt-5">
+            <h1 class="text-white text-center">Stopwatchhhh......!!!!!!!</h1>
+            <p class="display-1 text-white text-center" id="display">00:00:00:00</p>
+            <div class="row justify-content-center">
+                <button class="btn btn-success btn-lg m-2 px-5" id="start" onclick='start()'>Start</button>
+                <button class="btn btn-success btn-lg m-2 px-5" id="stop" onclick='stop()'>Stop</button>
+                <button class="btn btn-success btn-lg m-2 px-5" id="reset" onclick='reset()'>Reset</button>
+            
+            </div>
+               
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    let millisecond = 0;
+    let second = 0;
+    let minute = 0;
+    let hour = 0;
+
+    let dispalyMillisecond = 0;
+    let displaySecond = 0;
+    let displayMinute = 0;
+    let displayHour = 0;
+
+    let timer = null;
+    let clicked = false;
+
+    function increaseSeconds(){
+        if( millisecond / 100 == 1){
+            millisecond = millisecond - 100;
+            second++;
+            console.log(second)
+        }
+    }
+
+    function increaseMinute(){
+        if( second / 60 == 1){
+            second = second - 60;
+            minute++;
+        }
+    }
+
+    function increaseHour(){
+        if( minute / 60 == 1){
+            minute = minute - 60;
+            hour++;
+        }
+    }
+ 
+    function stopWatch(){
+        millisecond ++;
+        increaseSeconds();
+        increaseMinute();
+        increaseHour();
+        if(millisecond < 10){
+            dispalyMillisecond = "0" + millisecond.toString();
+        }
+        else{
+            dispalyMillisecond = millisecond;
+        }
+        if(second < 10){
+            displaySecond = "0" + second.toString();
+        }
+        else{
+            displaySecond = second;
+        }
+        if(minute < 10){
+            displayMinute = "0" + minute.toString();
+        }
+        else{
+            displayMinute = minute;
+        }
+        if(hour < 10){
+            displayHour = "0" + hour.toString();
+        }
+        else{
+            displayHour = hour;
+        }
+        
+        document.getElementById("display").innerHTML = 
+        displayHour + ":" +
+        displayMinute + ":" + 
+        displaySecond + ":" +
+        dispalyMillisecond ;
+
+    }
+
+   
+    function start(){
+        if(clicked == false){
+            timer = window.setInterval(stopWatch, 20);
+            clicked = true;
+        }
+        
+    }
+
+    function stop(){
+        if(clicked == true){
+           window.clearInterval(timer);
+            clicked = false;
+        }
+        
+    }
+
+    
+    function reset(){
+        milliseconds = 0;
+        seconds = 0;
+        minutes = 0;
+        hours = 0;
+        document.getElementById("display").innerHTML = "00:00:00:00";
+        window.clearInterval(timer);
+        clicked = false;
+        
+    }
+
+    
+
+
+
+
+    
+
+
+</script>
+
+ 
